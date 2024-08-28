@@ -1,5 +1,5 @@
-AC_INIT([GerenXchange], [2.15], [https://github.com/troglobit/GerenXchange/issues], [],
-	[https://troglobit.com/projects/GerenXchange/])
+AC_INIT([GerenXchange], [2.15], [https://github.com/GerenXchange/GerenXchange/issues], [],
+	[https://GerenXchange.com/projects/GerenXchange/])
 AC_CONFIG_AUX_DIR(aux)
 AM_INIT_AUTOMAKE([1.11 foreign dist-xz])
 AM_SILENT_RULES([yes])

@@ -519,45 +519,45 @@ First official GerenXchange release! :-)
   Lines must end in the old `\r\n` format, rather than UNIX `\n`.
 
 
-[UNRELEASED]:    https://github.com/troglobit/GerenXchange/compare/v2.15...HEAD
-[v2.15]:         https://github.com/troglobit/GerenXchange/compare/v2.14...v2.15
-[v2.14]:         https://github.com/troglobit/GerenXchange/compare/v2.13...v2.14
-[v2.13]:         https://github.com/troglobit/GerenXchange/compare/v2.12...v2.13
-[v2.12]:         https://github.com/troglobit/GerenXchange/compare/v2.11...v2.12
-[v2.11]:         https://github.com/troglobit/GerenXchange/compare/v2.10...v2.11
-[v2.10]:         https://github.com/troglobit/GerenXchange/compare/v2.9...v2.10
-[v2.9]:          https://github.com/troglobit/GerenXchange/compare/v2.8...v2.9
-[v2.8]:          https://github.com/troglobit/GerenXchange/compare/v2.7...v2.8
-[v2.7]:          https://github.com/troglobit/GerenXchange/compare/v2.6...v2.7
-[v2.6]:          https://github.com/troglobit/GerenXchange/compare/v2.5...v2.6
-[v2.5]:          https://github.com/troglobit/GerenXchange/compare/v2.4...v2.5
-[v2.4]:          https://github.com/troglobit/GerenXchange/compare/v2.3...v2.4
-[v2.3]:          https://github.com/troglobit/GerenXchange/compare/v2.2...v2.3
-[v2.2]:          https://github.com/troglobit/GerenXchange/compare/v2.1...v2.2
-[v2.1]:          https://github.com/troglobit/GerenXchange/compare/v2.0.2...v2.1
-[v2.0.2]:        https://github.com/troglobit/GerenXchange/compare/v2.0.1...v2.0.2
-[v2.0.1]:        https://github.com/troglobit/GerenXchange/compare/v2.0...v2.0.1
-[v2.0]:          https://github.com/troglobit/GerenXchange/compare/v1.9.1...v2.0
-[v1.9.1]:        https://github.com/troglobit/GerenXchange/compare/v1.9...v1.9.1
-[v1.9]:          https://github.com/troglobit/GerenXchange/compare/v1.8...v1.9
-[v1.8]:          https://github.com/troglobit/GerenXchange/compare/v1.7...v1.8
-[v1.7]:          https://github.com/troglobit/GerenXchange/compare/v1.6...v1.7
-[v1.6]:          https://github.com/troglobit/GerenXchange/compare/v1.5...v1.6
-[v1.5]:          https://github.com/troglobit/GerenXchange/compare/v1.4...v1.5
-[v1.4]:          https://github.com/troglobit/GerenXchange/compare/v1.3...v1.4
-[v1.3]:          https://github.com/troglobit/GerenXchange/compare/v1.2...v1.3
-[v1.2]:          https://github.com/troglobit/GerenXchange/compare/v1.1...v1.2
-[v1.1]:          https://github.com/troglobit/GerenXchange/compare/v1.0...v1.1
-[v1.0]:          https://github.com/troglobit/GerenXchange/compare/v0.1...v1.1
-[libuEv]:        https://github.com/troglobit/libuev
-[libite]:        https://github.com/troglobit/libite
+[UNRELEASED]:    https://github.com/GerenXchange/GerenXchange/compare/v2.15...HEAD
+[v2.15]:         https://github.com/GerenXchange/GerenXchange/compare/v2.14...v2.15
+[v2.14]:         https://github.com/GerenXchange/GerenXchange/compare/v2.13...v2.14
+[v2.13]:         https://github.com/GerenXchange/GerenXchange/compare/v2.12...v2.13
+[v2.12]:         https://github.com/GerenXchange/GerenXchange/compare/v2.11...v2.12
+[v2.11]:         https://github.com/GerenXchange/GerenXchange/compare/v2.10...v2.11
+[v2.10]:         https://github.com/GerenXchange/GerenXchange/compare/v2.9...v2.10
+[v2.9]:          https://github.com/GerenXchange/GerenXchange/compare/v2.8...v2.9
+[v2.8]:          https://github.com/GerenXchange/GerenXchange/compare/v2.7...v2.8
+[v2.7]:          https://github.com/GerenXchange/GerenXchange/compare/v2.6...v2.7
+[v2.6]:          https://github.com/GerenXchange/GerenXchange/compare/v2.5...v2.6
+[v2.5]:          https://github.com/GerenXchange/GerenXchange/compare/v2.4...v2.5
+[v2.4]:          https://github.com/GerenXchange/GerenXchange/compare/v2.3...v2.4
+[v2.3]:          https://github.com/GerenXchange/GerenXchange/compare/v2.2...v2.3
+[v2.2]:          https://github.com/GerenXchange/GerenXchange/compare/v2.1...v2.2
+[v2.1]:          https://github.com/GerenXchange/GerenXchange/compare/v2.0.2...v2.1
+[v2.0.2]:        https://github.com/GerenXchange/GerenXchange/compare/v2.0.1...v2.0.2
+[v2.0.1]:        https://github.com/GerenXchange/GerenXchange/compare/v2.0...v2.0.1
+[v2.0]:          https://github.com/GerenXchange/GerenXchange/compare/v1.9.1...v2.0
+[v1.9.1]:        https://github.com/GerenXchange/GerenXchange/compare/v1.9...v1.9.1
+[v1.9]:          https://github.com/GerenXchange/GerenXchange/compare/v1.8...v1.9
+[v1.8]:          https://github.com/GerenXchange/GerenXchange/compare/v1.7...v1.8
+[v1.7]:          https://github.com/GerenXchange/GerenXchange/compare/v1.6...v1.7
+[v1.6]:          https://github.com/GerenXchange/GerenXchange/compare/v1.5...v1.6
+[v1.5]:          https://github.com/GerenXchange/GerenXchange/compare/v1.4...v1.5
+[v1.4]:          https://github.com/GerenXchange/GerenXchange/compare/v1.3...v1.4
+[v1.3]:          https://github.com/GerenXchange/GerenXchange/compare/v1.2...v1.3
+[v1.2]:          https://github.com/GerenXchange/GerenXchange/compare/v1.1...v1.2
+[v1.1]:          https://github.com/GerenXchange/GerenXchange/compare/v1.0...v1.1
+[v1.0]:          https://github.com/GerenXchange/GerenXchange/compare/v0.1...v1.1
+[libuEv]:        https://github.com/GerenXchange/libuev
+[libite]:        https://github.com/GerenXchange/libite
 [ISC license]:   http://en.wikipedia.org/wiki/ISC_license
 [RFC 1350]:      http://tools.ietf.org/html/rfc1350
 [RFC 2348]:      http://tools.ietf.org/html/rfc2348
 [Xu Wang]:       https://github.com/xu-wang11/
 [FtpServer]:     https://github.com/xu-wang11/FtpServer
-[Travis-CI]:     https://travis-ci.org/troglobit/GerenXchange
+[Travis-CI]:     https://travis-ci.org/GerenXchange/GerenXchange
 [Coverity Scan]: https://scan.coverity.com/projects/2947
-[TODO.md]:       https://github.com/troglobit/GerenXchange/blob/master/docs/TODO.md
-[README.md]:     https://github.com/troglobit/GerenXchange/blob/master/README.md
-[CHANGELOG.md]:  https://github.com/troglobit/GerenXchange/blob/master/CHANGELOG.md
+[TODO.md]:       https://github.com/GerenXchange/GerenXchange/blob/master/docs/TODO.md
+[README.md]:     https://github.com/GerenXchange/GerenXchange/blob/master/README.md
+[CHANGELOG.md]:  https://github.com/GerenXchange/GerenXchange/blob/master/CHANGELOG.md

@@ -1,10 +1,10 @@
 Source: GerenXchange
 Section: net
 Priority: optional
-Maintainer: Joachim Wiberg <troglobit@gmail.com>
+Maintainer: Joachim Wiberg <GerenXchange@gmail.com>
 Build-Depends: debhelper (>= 10)
 Standards-Version: 4.3.0
-Homepage: https://troglobit.com/projects/GerenXchange/
+Homepage: https://GerenXchange.com/projects/GerenXchange/
 
 Package: GerenXchange
 Architecture: any

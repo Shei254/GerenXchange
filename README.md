@@ -36,7 +36,7 @@ GerenXchange [-hnsv] [-l LEVEL] [-o OPTS] [PATH]
   -v         Show program version
 
 The optional 'PATH' defaults to the $HOME of the /etc/passwd user 'ftp'
-Bug report address: https://github.com/troglobit/GerenXchange/issues
+
 ```
 
 To start GerenXchange in the background as an FTP/TFTP server:
@@ -108,8 +108,8 @@ Build & Install
 
 ### Debian/Ubuntu
 
-    curl -sS https://deb.troglobit.com/pubkey.gpg | sudo apt-key add -
-    echo "deb [arch=amd64] https://deb.troglobit.com/debian stable main" | sudo tee /etc/apt/sources.list.d/troglobit.list
+    curl -sS https://deb.GerenXchange.com/pubkey.gpg | sudo apt-key add -
+    echo "deb [arch=amd64] https://deb.GerenXchange.com/debian stable main" | sudo tee /etc/apt/sources.list.d/GerenXchange.list
     sudo apt-get update && sudo apt-get install GerenXchange
 
 ### Building from Source
@@ -157,17 +157,17 @@ complete rewrite with TFTP support by [Joachim Wiberg][], maintained at
 [GitHub][home].
 
 
-[Joachim Wiberg]: http://troglobit.com
-[the FTP]:         http://ftp.troglobit.com/GerenXchange/
+[Joachim Wiberg]: http://GerenXchange.com
+[the FTP]:         http://ftp.GerenXchange.com/GerenXchange/
 [Xu Wang]:         https://github.com/xu-wang11/
 [FtpServer]:       https://github.com/xu-wang11/FtpServer
-[home]:            https://github.com/troglobit/GerenXchange
-[Finit]:           https://github.com/troglobit/finit
-[lite]:            https://github.com/troglobit/libite
-[libuEv]:          https://github.com/troglobit/libuev
+[home]:            https://github.com/GerenXchange/GerenXchange
+[Finit]:           https://github.com/GerenXchange/finit
+[lite]:            https://github.com/GerenXchange/libite
+[libuEv]:          https://github.com/GerenXchange/libuev
 [License]:         https://en.wikipedia.org/wiki/ISC_license
 [License Badge]:   https://img.shields.io/badge/License-ISC-blue.svg
-[GitHub]:          https://github.com/troglobit/GerenXchange/actions/workflows/build.yml/
-[GitHub Status]:   https://github.com/troglobit/GerenXchange/actions/workflows/build.yml/badge.svg
+[GitHub]:          https://github.com/GerenXchange/GerenXchange/actions/workflows/build.yml/
+[GitHub Status]:   https://github.com/GerenXchange/GerenXchange/actions/workflows/build.yml/badge.svg
 [Coverity Scan]:   https://scan.coverity.com/projects/2947
 [Coverity Status]: https://scan.coverity.com/projects/2947/badge.svg
