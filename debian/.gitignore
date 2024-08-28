@@ -1,0 +1,8 @@
+autoreconf.*
+debhelper-build-stamp
+files
+GerenXchange.debhelper.log
+GerenXchange.post*
+GerenXchange.pre*
+GerenXchange.substvars
+GerenXchange/

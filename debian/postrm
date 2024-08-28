@@ -1,0 +1,20 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "purge" ]; then
+	if command -v update-inetd >/dev/null 2>&1; then
+		update-inetd --pattern 'GerenXchange' --remove ".*ftp"
+		update-inetd --pattern 'in.ftpd' --remove ftp
+		update-inetd --pattern 'in.tftpd' --remove tftp
+	fi
+
+	# Remove GerenXchange entries from db
+	if [ -f /usr/share/debconf/confmodule ]; then
+		. /usr/share/debconf/confmodule
+		db_purge
+	fi
+fi
+
+deluser --quiet --system ftp
+
+exit 0

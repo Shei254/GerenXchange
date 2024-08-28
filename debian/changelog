@@ -1,0 +1,267 @@
+GerenXchange (2.15) stable; urgency=medium
+
+  * Silence some developer debug messages
+  * Always skip `.` and `..` in FTP listings
+  * Fix mdoc warning, found by lintian
+  * Fix regression introduced in v2.14, server directory name shown in FTP
+    listings instead of `.`, e.g. `MLST .` showed the directory name 
+  * Fix #36: for real this time, now also with a test case to verify
+  * Fix #38: duplicate entries in FTP listings, regression in v2.14.
+    Caused by (initially unintentional) removal of sorted listings, where
+    directories prior to v2.14 were listed first.  This change, albeit an
+    accident, actually helped clean up the code base and speed up replies
+
+ -- Joachim Wiberg <troglobit@gmail.com>  Mon, 20 Dec 2021 06:15:08 +0100
+
+GerenXchange (2.14) stable; urgency=medium
+
+  * Add support for `-o pasv_addr=ADDR` command line argument to override
+  * Add support for `-p PIDFILE` command line argument
+    the address passed to the client in passive mode, useful for some
+    types of NAT setup
+  * Fix issue #36: MLST command without any argument blocks
+  * Fix memory leak in MLST/MLSD, only affects no-MMU systems where the
+    kernel cannot free memory of processes on exit
+
+ -- Joachim Wiberg <troglobit@gmail.com>  Sat, 11 Dec 2021 11:27:57 +0100
+
+GerenXchange (2.13) unstable; urgency=medium
+
+  * Fix issue #31: Socket leak in daemon accept(), causing denial of
+    service in standalone daemon setups.  Does not affect .deb install.
+  * Fix minor memory leak, only affects non-MMU systems.
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Tue, 30 Jun 2020 23:36:35 +0200
+
+GerenXchange (2.12) stable; urgency=medium
+
+  * Fix issue #30: GerenXchange crashes when an invalid CWD is entered
+  * Use common log message format and log level for all path refs.
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Mon, 25 May 2020 18:08:32 +0200
+
+GerenXchange (2.11) unstable; urgency=medium
+
+  * Increased logging at default log level.  Now all relevant interaction
+    is logged.  See the man page for how to adjust.
+  * Fix buffer overflow in FTP PORT parser
+  * Fix TFTP/FTP directory traversal regression
+  * Fix potential DOS through non-busy loop and segfault
+  * Fix potential segfault through empty FTP password
+  * Fix potential segfault through FTP PORT command
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Sun, 05 Jan 2020 08:49:56 +0100
+
+GerenXchange (2.10) unstable; urgency=medium
+
+  * Add support for TFTP WRQ, i.e. for clients sending files to server
+  * Fix invalid TFTP error codes, now uses custom error string to code 0
+  * Slightly improved debug messages
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Thu, 15 Aug 2019 08:59:35 +0200
+
+GerenXchange (2.9) unstable; urgency=medium
+
+  * Check FTP root security after dropping privileges, issue #22
+  * Revert insecure default: "writable FTP root", introduced in v2.8
+  * Revert part of issue #18 to fix issue #23; "CWD /" doesn't work
+  * Update debian packaging to policy 4.3.0
+  * Fix failing postrm script, causing dpkg -P GerenXchange to fail hard
+  * Fix spelling errors found by Lintian
+  * Fix package description, more formal and less personal, thanks Lintian
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Mon, 29 Jul 2019 10:52:49 +0200
+
+GerenXchange (2.8) unstable; urgency=medium
+
+  * Fix off-by-one regression introduced in v2.5
+  * Convert all commands from user to uppercase for processing
+  * Skip any and *all* FTP LIST options
+  * Enable users group writable FTP root in /etc/inetd.conf
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Tue, 28 May 2019 06:22:18 +0200
+
+GerenXchange (2.7) unstable; urgency=medium
+
+  * Bug fix release
+  * Fix running GerenXchange as unprivileged user using a relative FTP root
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Sun, 03 Mar 2019 11:39:03 +0100
+
+GerenXchange (2.6) unstable; urgency=medium
+
+  * Bug fix release
+  * Really fix 100% CPU issue, take two.  Some clients managed to trigger
+    a bug caused by calling `uev_exit()` twice on client session exit
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Tue, 03 Jul 2018 17:14:00 +0200
+
+GerenXchange (2.5) unstable; urgency=critical
+
+  * Really fix 100% CPU issue
+  * Fix line endings for NLST and LIST FTP commands
+  * Add support for EPSV, MLSD, ABOR, and REST FTP commands, required
+    for VLC Android app
+  * Add support for CDUP, DELE, MKD, RMD, MLST, and OPTS MLST
+  * Refactor LIST, RETR, STOR and PASV FTP commands for speed
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Sat, 19 May 2018 13:35:01 +0200
+
+GerenXchange (2.4-1) unstable; urgency=medium
+
+  * New upstream release, fixes 100% CPU issue reported by some users.
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Sun, 03 Sep 2017 12:38:38 +0200
+
+GerenXchange (2.3-1) stable; urgency=low
+
+  * New upstream release, fixes issue with lingering inetd FTP processes
+    using up 100% CPU.
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Wed, 22 Mar 2017 07:56:00 +0100
+
+GerenXchange (2.2-4) stable; urgency=low
+
+  * Fix dpkg-reconfigure support.  When disabling either TFTP/FTP
+    the disabled service was not properly disabled in /etc/inetd.conf
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Sun, 14 Mar 2017 22:05:00 +0100
+
+GerenXchange (2.2-3) stable; urgency=low
+
+  * Add debconf support
+  * Change default group and permissions of /srv/ftp to prevent any
+    future "security" breaches by uploads to the FTP root directory.
+
+    A user must now be member of the users group to share files over
+    TFTP/FTP.  Simply add a user to 'users' and they can upload their
+    files to /srv/ftp.  The TFTP/FTP server itself has no rights to
+    write there.  Add an uploads/ sub-directory with write perms for
+    the 'ftp' user if you want to enable anonymous uploads via FTP.
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Sun, 13 Mar 2017 19:56:00 +0100
+
+GerenXchange (2.2-1) stable; urgency=low
+
+  * New upstream release, v2.2
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Sun, 12 Mar 2017 17:36:00 +0100
+
+GerenXchange (2.1-1) stable; urgency=low
+
+  * New upstream release, v2.1
+    - Removed built-in GIT submodules for libite and libuev
+    - Updated README
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Sun,  5 Jun 2016 00:19:30 +0100
+
+GerenXchange (2.0-1) stable; urgency=low
+
+  * New upstream release, v2.0
+    - Completely changed command line syntax
+    - New binaries (symlinks) for inetd usage, in.tftpd and in.ftpd
+    - Updated man page
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Sun, 22 Jan 2016 13:51:56 +0100
+
+GerenXchange (2.0-rc1-1) unstable; urgency=low
+
+  * New upstream release, v2.0-rc1
+    - Completely changed command line syntax
+    - New binaries (symlinks) for inetd usage
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Sun, 17 Jan 2016 23:16:58 +0100
+
+GerenXchange (1.9.1-1) unstable; urgency=medium
+
+  * Minor fix release
+  * Added support for building with external libite and libuEv
+  * Rebuild for Ubuntu 15.10
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Sun, 27 Sep 2015 10:14:31 +0200
+
+GerenXchange (1.9-1) unstable; urgency=low
+
+  * New upstream release:
+    - Add support for NLST FTP command.
+    - Fix problem with 2 seconds before exiting on SIGTERM/SIGINT.
+    - Fix zombie problem when backgrounding.
+    - Add support for automatically creating a PID file.
+    - Fix problem with LIST (and NLST) ignoring path argument.
+    - Fix problem with FTP client simply closing connection (no QUIT)
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Mon, 13 Jul 2015 01:25:26 +0200
+
+GerenXchange (1.8-1) unstable; urgency=low
+
+  * New upstream release:
+    - Fix insecure chroot(), reported by Coverity Scan, CID #54523
+    - Minor updates to README and a new CHANGELOG file
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Sun,  2 Feb 2015 06:45:06 +0100
+
+GerenXchange (1.7-1) unstable; urgency=low
+
+  * New upstream release:
+    - Support for TFTP blocksize negotiation.
+    - Support for custom FTP server directory.
+    - Log to stderr when in foreground AND debug mode.
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Sun, 21 Dec 2014 19:35:29 +0100
+
+GerenXchange (1.6-1) unstable; urgency=low
+
+  * Repack of 1.5 due to missing content in new libuev subdirectory in
+    distributed tarball.
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Fri, 12 Sep 2014 15:45:08 +0200
+
+GerenXchange (1.5-1) unstable; urgency=low
+
+  * New upstream release, minor bug fixes only, found by Coverity Scan.
+  * Updates to README
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Fri, 12 Sep 2014 01:30:01 +0200
+
+GerenXchange (1.4-1) unstable; urgency=low
+
+  * New upstream release, bug fix TFTP start in /etc/inetd.conf
+  * Updates to man page.
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Thu, 04 Sep 2014 22:16:22 +0200
+
+GerenXchange (1.3-1) unstable; urgency=low
+
+  * New upstream release, with TFTP support.
+  * Incompatible change in command line options.
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Tue, 19 Aug 2014 23:27:28 +0200
+
+GerenXchange (1.2-1) unstable; urgency=low
+
+  * New upstream release.  Fixes problem with listing "big" directories.
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Mon, 19 May 2014 22:02:17 +0200
+
+GerenXchange (1.1-1) unstable; urgency=low
+
+  * New release.  Fixes problem with lingering zombie processes and an
+    ordering bug preventing drop privs from working properly.
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Sun, 04 May 2014 23:37:24 +0200
+
+GerenXchange (1.0-2) unstable; urgency=low
+
+  * Add support for creating and removing the standard ftp user on
+    installation and removal.  Use /srv/ftp as $HOME and make sure
+    to not remove $HOME when removing GerenXchange.  This also means that
+    the GerenXchange privsep mode gets its first testing.
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Sun, 04 May 2014 19:28:16 +0200
+
+GerenXchange (1.0-1) unstable; urgency=low
+
+  * Initial release.
+
+ -- Joachim Nilsson <troglobit@gmail.com>  Sun,  4 May 2014 03:03:32 +1000
+

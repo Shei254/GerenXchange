@@ -1,0 +1,10 @@
+Template: GerenXchange/ftp
+Type: boolean
+Default: true
+Description: Enable FTP service?
+
+Template: GerenXchange/tftp
+Type: boolean
+Default: true
+Description: Enable TFTP service?
+

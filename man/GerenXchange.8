@@ -1,0 +1,241 @@
+.\"
+.\" Copyright (c) 2014-2021  Joachim Wiberg <troglobit@gmail.com>
+.\"
+.\" Permission to use, copy, modify, and/or distribute this software for any
+.\" purpose with or without fee is hereby granted, provided that the above
+.\" copyright notice and this permission notice appear in all copies.
+.\"
+.\" THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+.\" WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+.\" MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+.\" ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+.\" WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+.\" ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+.\" OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+.\"
+.Dd December 6, 2021
+.Dt GerenXchange 8
+.Os "GerenXchange (2.14)"
+.Sh NAME
+.Nm GerenXchange
+.Nd
+No nonsense TFTP/FTP Server
+.Sh SYNOPSIS
+.Nm
+.Op Fl hnsv
+.Op Fl l Ar LOG
+.Op Fl o Ar ftp=PORT,tftp=PORT,writable
+.Op Fl p Ar FILE
+.Op Ar PATH
+.Sh DESCRIPTION
+.Nm
+is a very simple TFTP and anonymous FTP server with inetd support.  It
+listens on standard Internet ports for each protocol, as defined in the
+system service specification,
+.Pa /etc/services ,
+unless other ports are given on the command line.  For details, see
+.Xr services 5 .
+.Pp
+Without any command line arguments
+.Nm
+serves both FTP and TFTP and automatically backgrounds itself.  Usually
+.Nm
+this means listen to port 21 (FTP) and port 69 (TFTP), serve files from
+.Pa /srv/ftp ,
+and log to syslog.  Messages are written to the syslog using the
+.Nm LOG_FTP
+facility.
+.Pp
+Available command line options:
+.Bl -tag -width Ds
+.It Fl h
+Show built-in help text
+.It Fl l Ar LOG
+Set log level: none, err,
+.Ar notice ,
+info, debug.  By default the log level is
+.Ar notice ,
+which is less verbose than
+.Ar info ,
+but still logs all relevant events: users logging in, uploading,
+downloading, creating and removing directories, etc.  To reduce
+the log level, start
+.Nm
+with
+.Fl l Ar error .
+.It Fl n
+Run in foreground, do not detach from controlling terminal
+.It Fl o
+Set
+.Nm
+option, separate multiple options with comma:
+.Bl -tag
+.It Ar ftp=PORT
+.It Ar tftp=PORT
+.It Ar writable
+.It Ar pasv_addr=ADDR
+.El
+.Pp
+Override Internet ports otherwise derived from
+.Xr services 5 .
+Set the
+.Ar PORT
+to zero (0) to disable a service.
+.Pp
+The
+.Ar writable
+option enables writable FTP root, which is not recommended.  Some people
+want this, but it is recommended to instead rely on a writable
+sub-directory, like
+.Ar upload/ ,
+or similar.
+.Pp
+An address passed to the client in passive mode can be overridden with
+the
+.Ar pasv_addr
+option (real data socket address remains unchanged). This may be useful
+for passing through some types of NAT.
+.It Fl p Ar FILE
+File to store process ID for signaling
+.Nm .
+The default depends on how
+.Nm
+was configured at build time, and also the UNIX system it runs on,
+but often it is found in
+.Pa /var/run/GerenXchange.pid .
+.It Fl s
+Use syslog, even if running in foreground, default when running in the
+background
+.It Fl v
+Show program version
+.It Ar PATH
+Root directory. The default is to serve files from the FTP user's $HOME.
+When started as root
+.Nm
+will chroot to this directory as a security measure.
+.El
+.Pp
+.Sh Inetd
+.Nm
+can also be used with an Internet superserver, like the traditional
+inetd or modern init replacements like finit.  In inetd mode the server
+takes client connections from stdin.  To enable inetd mode
+.Nm
+must be called as either
+.Nm in.tftpd
+or
+.Nm in.ftpd .
+In inetd mode
+.Nm
+always runs in the foreground with syslog for messages.
+.Pp
+.Sh FTP
+The file
+.Pa /etc/nologin
+can be used to disable FTP access.  If the file exists,
+.Nm
+displays it and exits.  If the file
+.Pa /etc/ftpwelcome
+exists,
+.Nm
+prints it before issuing the
+.Dq ready
+message.
+If the file
+.Pa /etc/motd
+exists,
+.Nm
+prints it after a successful login.  If the file
+.Pa .message
+exists in a directory,
+.Nm
+prints it when that directory is entered.
+.Pp
+The FTP server currently supports the following requests.
+The case of the requests is ignored.
+.Bl -column "Request" -offset indent
+.It Sy Request Ta Sy "Description"
+.It ABOR Ta "abort current transfer"
+.It CDUP Ta "shorthand for CD .. command"
+.It CWD Ta "change working directory"
+.It CLNT Ta "accepted and ignored by server"
+.It DELE Ta "delete a file"
+.It EPRT Ta "RFC 2428, extended PORT command"
+.It EPSV Ta "extended PASV command, used by VLC for Android"
+.It FEAT Ta "list supported features"
+.It HELP Ta "show help text"
+.It LIST Ta "give list files in a directory" Pq Dq Li "ls -lgA"
+.It MDTM Ta "RFC 3659, return the last-modified time of a file"
+.It MLST Ta "RFC 3659 extension to LIST"
+.It MLSD Ta "RFC 3659 extension to LIST"
+.It MKD Ta "make a directory"
+.It NLST Ta "like LIST, but much less verbose"
+.It NOOP Ta "do nothing, used for keep-alive"
+.It PASS Ta "specify password"
+.It PASV Ta "prepare for server-to-server transfer"
+.It PORT Ta "specify data connection port"
+.It PWD Ta "print the current working directory"
+.It QUIT Ta "terminate session"
+.It REST Ta "restore RETR or STOR command at file offset"
+.It RETR Ta "retrieve a file"
+.It RMD Ta "remove a directory"
+.It RNFR Ta "specify rename-from file name"
+.It RNTO Ta "specify rename-to file name"
+.It SIZE Ta "return size of file"
+.It STOR Ta "store a file"
+.It SYST Ta "show operating system type of server system"
+.It TYPE Ta "specify data transfer" Em type
+.It USER Ta "specify user name"
+.El
+.Pp
+Remaining FTP requests, as specified in Internet RFC959, are not
+recognized at the moment.  Patches are welcome!
+.Pp
+.Sh TFTP
+.Nm
+also supports TFTP, the Trivial File Transfer Protocol, which is
+often used for net booting diskless devices, e.g., BOOTP and PXEBOOT.
+.Pp
+The TFTP server currently supports the following requests.
+.Bl -column "Request" -offset indent
+.It Sy Request Ta Sy Description
+.It RRQ     Ta Read Request for file, may have options
+.It WRQ     Ta Write Request for file, may have options
+.It DATA    Ta File data, preceded by block n:o
+.It ERROR   Ta Error, end of session
+.It ACK     Ta ACKnowledge DATA or WRQ without options
+.It OACK    Ta Option acknowledged, sent as response to RRQ/WRQ
+.El
+.Pp
+.Nm
+supports TFTP blocksize negotiation, according to RFC2348, so full sized
+Ethernet frames can be used, which greatly speeds up transfers.
+.Pp
+.Sh FILES
+.Bl -tag -width /etc/ftpwelcome -compact
+.It Pa /etc/ftpwelcome
+FTP Welcome notice.
+.It Pa /etc/motd
+Message of the day, presented after successful FTP login.
+.It Pa /etc/nologin
+Displayed to user attempting to connect.  Access is refused if this
+file exists.
+.It Pa /var/run/GerenXchange.pid
+Program default PID file, created only when
+.Nm
+is ready with its internal setup and able to service signals.  Note,
+.Nm
+exits on most signals.  So no special processing is done atm.
+.El
+.Sh SEE ALSO
+.Xr ftp 1 ,
+.Xr tftp 1 ,
+.Xr syslogd 8
+.Sh AUTHORS
+.Nm
+was written by Joachim Wiberg
+.Aq mailto:troglobit@gmail.com
+and is maintained at
+.Aq https://github.com/troglobit/GerenXchange
+.Sh BUGS
+Here be dragons.

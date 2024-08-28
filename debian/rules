@@ -1,0 +1,16 @@
+#!/usr/bin/make -f
+# export DH_VERBOSE=1
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+export DEB_BUILD_OPTIONS='parallel=1'
+
+%:
+	dh $@ --with autoreconf,systemd
+
+override_dh_installchangelogs:
+	dh_installchangelogs ChangeLog.md
+
+# Remove LICENSE and ChangeLog.md per Debian Policy
+override_dh_auto_install:
+	dh_auto_install
+	rm -v debian/GerenXchange/usr/share/doc/GerenXchange/LICENSE
+	rm -v debian/GerenXchange/usr/share/doc/GerenXchange/ChangeLog.md

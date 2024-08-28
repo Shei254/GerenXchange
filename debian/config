@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+. /usr/share/debconf/confmodule
+
+db_title GerenXchange
+
+db_input critical GerenXchange/ftp || true
+db_go
+
+db_input critical GerenXchange/tftp || true
+db_go
+
